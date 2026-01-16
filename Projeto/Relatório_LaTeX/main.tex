@@ -1,0 +1,174 @@
+\documentclass[12pt,a4paper]{article}
+
+\usepackage[portuguese]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{geometry}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{amsmath}
+\usepackage{booktabs}
+\usepackage{hyperref}
+
+\geometry{margin=2.5cm}
+
+\title{\textbf{Simulação de uma Clínica Médica}\\
+\large Projeto de Algoritmos e Técnicas de Programação}
+
+\author{
+Grupo 23 \\
+\vspace{0.3cm}
+Inês Pereira – A111776 \\
+\vspace{0.3cm}
+Tiago Alves – A111017 \\
+\vspace{0.3cm}
+Tomás Gonçalves – A111441 \\
+\vspace{0.3cm}
+Licenciatura em Engenharia Biomédica \\
+Universidade do Minho
+}
+
+\date{Ano Letivo 2025/26}
+
+\begin{document}
+
+\maketitle
+\thispagestyle{empty}
+\newpage
+
+\tableofcontents
+\newpage
+
+% ==================================================
+\section{Introdução}
+
+No âmbito da unidade curricular de Algoritmos e Técnicas de Programação, desenvolvemos em grupo uma aplicação em Python que simula o funcionamento de uma clínica médica. O projeto tem como foco a gestão de filas de espera, a alocação de médicos por especialidade e a priorização clínica dos doentes.
+
+A simulação baseia-se em eventos discretos e integra o Sistema de Triagem de Manchester, amplamente utilizado em serviços de urgência hospitalar. O objetivo principal é analisar métricas de desempenho como tempos de espera, ocupação dos médicos e impacto da prioridade clínica no atendimento.
+
+% ==================================================
+\section{Objetivos do Projeto}
+
+Os objetivos definidos para este trabalho de grupo são:
+
+\begin{itemize}
+    \item Desenvolver uma simulação de eventos discretos em Python;
+    \item Modelar a chegada e atendimento de doentes num contexto clínico;
+    \item Aplicar distribuições estatísticas aos processos de chegada;
+    \item Implementar a Triagem de Manchester como sistema de priorização;
+    \item Recolher e analisar estatísticas de desempenho do sistema;
+    \item Criar uma interface gráfica interativa para visualização e controlo.
+\end{itemize}
+
+% ==================================================
+\section{Descrição do Sistema}
+
+O sistema desenvolvido simula uma clínica médica composta por várias especialidades: Medicina Geral, Pediatria e Ortopedia. Os doentes chegam à clínica de forma aleatória e são classificados segundo a Triagem de Manchester, sendo encaminhados para a fila correspondente à especialidade necessária.
+
+Os médicos pertencem a uma única especialidade e atendem os doentes de acordo com a prioridade clínica e disponibilidade. Caso não exista médico disponível, o doente permanece em fila de espera até ser atendido.
+
+% ==================================================
+\section{Triagem de Manchester}
+
+A priorização dos doentes é realizada com base no Sistema de Triagem de Manchester, que classifica os doentes em cinco níveis de urgência, representados por pulseiras de diferentes cores:
+
+\begin{table}[H]
+\centering
+\begin{tabular}{ll}
+\toprule
+\textbf{Pulseira} & \textbf{Prioridade} \\
+\midrule
+Vermelha & Emergência \\
+Laranja & Muito urgente \\
+Amarela & Urgente \\
+Verde & Pouco urgente \\
+Azul & Não urgente \\
+\bottomrule
+\end{tabular}
+\caption{Classificação segundo a Triagem de Manchester}
+\end{table}
+
+Este sistema garante que os doentes em situação mais crítica são atendidos prioritariamente.
+
+% ==================================================
+\section{Parâmetros da Simulação}
+
+A aplicação permite configurar os seguintes parâmetros através da interface gráfica:
+
+\begin{itemize}
+    \item Número de médicos disponíveis;
+    \item Taxa média de chegada de doentes;
+    \item Distribuição estatística das chegadas (Exponencial, Normal ou Uniforme);
+    \item Tempo médio de consulta;
+    \item Duração total da simulação.
+\end{itemize}
+
+Esta flexibilidade permite analisar diferentes cenários e avaliar o impacto das variáveis no desempenho do sistema.
+
+% ==================================================
+\section{Modelo de Simulação}
+
+A simulação é baseada num modelo de eventos discretos que avança o tempo em passos unitários. Em cada passo são tratados os seguintes eventos:
+
+\begin{enumerate}
+    \item Chegada de novos doentes;
+    \item Atualização do estado dos médicos;
+    \item Conclusão de consultas;
+    \item Atribuição de médicos livres a doentes em espera;
+    \item Atualização das estatísticas globais.
+\end{enumerate}
+
+As filas de espera são separadas por especialidade, assegurando coerência entre médicos e doentes.
+
+% ==================================================
+\section{Interface Gráfica}
+
+A interface gráfica foi desenvolvida com a biblioteca \texttt{FreeSimpleGUI}. Esta permite ao utilizador:
+
+\begin{itemize}
+    \item Configurar os parâmetros da simulação;
+    \item Iniciar e parar a execução do sistema;
+    \item Visualizar em tempo real as filas de espera e o estado dos médicos;
+    \item Consultar estatísticas agregadas do sistema;
+    \item Gerar gráficos e histogramas;
+    \item Exportar os resultados para ficheiros CSV.
+\end{itemize}
+
+A organização visual da interface melhora a usabilidade e facilita a análise dos resultados.
+
+% ==================================================
+\section{Resultados e Análise}
+
+Os testes realizados pelo grupo permitiram observar vários comportamentos relevantes:
+
+\begin{itemize}
+    \item O aumento da taxa de chegada provoca crescimento do tamanho médio das filas;
+    \item O aumento do número de médicos reduz o tempo médio de espera;
+    \item Doentes com maior prioridade apresentam tempos de espera significativamente inferiores;
+    \item A ocupação média dos médicos aumenta com taxas de chegada mais elevadas;
+    \item Desequilíbrios entre especialidades podem causar congestionamento localizado.
+\end{itemize}
+
+Foram gerados gráficos temporais e histogramas que permitiram uma análise detalhada do desempenho do sistema.
+
+% ==================================================
+\section{Distribuição de Tarefas no Grupo}
+
+O trabalho foi desenvolvido de forma colaborativa pelos três elementos do grupo, com a seguinte distribuição de responsabilidades:
+
+\begin{itemize}
+    \item \textbf{Elemento 1}: Desenvolvimento da lógica da simulação e gestão de filas;
+    \item \textbf{Elemento 2}: Implementação da Triagem de Manchester e recolha de estatísticas;
+    \item \textbf{Elemento 3}: Desenvolvimento da interface gráfica e análise dos resultados.
+\end{itemize}
+
+Todos os elementos participaram na validação do sistema e na elaboração do relatório final.
+
+% ==================================================
+\section{Conclusão}
+
+O trabalho desenvolvido permitiu aplicar conceitos fundamentais de programação, estatística e simulação computacional. A integração da Triagem de Manchester tornou o modelo mais realista e adequado ao contexto clínico.
+
+Os objetivos definidos para o projeto foram cumpridos com sucesso, resultando numa aplicação funcional, extensível e com elevado valor pedagógico.
+
+\end{document}

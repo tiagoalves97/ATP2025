@@ -1,0 +1,250 @@
+\documentclass[12pt,a4paper]{article}
+
+% ----------------------------
+% PACOTES
+% ----------------------------
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[portuguese]{babel}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{float}
+\usepackage{booktabs}
+\usepackage{geometry}
+\usepackage{setspace}
+\usepackage{hyperref}
+\usepackage{caption}
+
+\geometry{margin=2.5cm}
+\onehalfspacing
+
+% ----------------------------
+% CAPA
+% ----------------------------
+\title{
+    \textbf{Simulação de uma Clínica Médica} \\
+    \large Projeto de Algoritmos e Técnicas de Programação
+}
+
+\author{
+    Grupo 23 \\
+    Inês Pereira - a111776 \\
+    Tiago Alves - a111017 \\
+    \vspace{0.5cm}
+    Tomás Gonçalves - a111441 \\
+    Licenciatura em Engenharia Biomédica \\
+    Universidade do Minho
+}
+
+\date{Ano Letivo 2025/26}
+
+\begin{document}
+
+\maketitle
+\thispagestyle{empty}
+\newpage
+
+% ----------------------------
+% RESUMO
+% ----------------------------
+\section*{Resumo}
+
+Este trabalho apresenta o desenvolvimento de um sistema de simulação discreta para o funcionamento de uma clínica médica, com especial foco na gestão de filas de espera, alocação de médicos e aplicação do sistema de Triagem de Manchester. O objetivo principal consiste em analisar o impacto de diferentes parâmetros operacionais, tais como a taxa de chegada de doentes, o número de médicos disponíveis e a distribuição das especialidades, no desempenho global do sistema. A simulação foi implementada em Python, recorrendo a bibliotecas como \textit{NumPy}, \textit{Matplotlib} e \textit{FreeSimpleGUI}, permitindo não só a análise estatística dos resultados, mas também a visualização gráfica e interativa do processo.
+
+\newpage
+
+% ----------------------------
+% ÍNDICE
+% ----------------------------
+\tableofcontents
+\newpage
+
+% ----------------------------
+% INTRODUÇÃO
+% ----------------------------
+\section{Introdução}
+
+A gestão eficiente de serviços de saúde é um desafio complexo, especialmente em contextos de elevada procura, como serviços de urgência e clínicas médicas. Um dos principais problemas enfrentados nestes sistemas é a formação de filas de espera, que pode resultar em tempos de espera elevados, insatisfação dos doentes e sobrecarga dos profissionais de saúde.
+
+Neste contexto, a simulação computacional surge como uma ferramenta poderosa para analisar e compreender o comportamento destes sistemas sem interferir com o seu funcionamento real. Este trabalho propõe a modelação e simulação de uma clínica médica, incorporando o sistema de Triagem de Manchester, amplamente utilizado em serviços de urgência para priorizar o atendimento dos doentes com base na gravidade clínica.
+
+O projeto foi desenvolvido em grupo, promovendo a divisão de tarefas, discussão de soluções e validação conjunta dos resultados obtidos.
+
+% ----------------------------
+% OBJETIVOS
+% ----------------------------
+\section{Objetivos}
+
+Os principais objetivos deste trabalho são:
+
+\begin{itemize}
+    \item Modelar o funcionamento de uma clínica médica através de simulação discreta.
+    \item Implementar o sistema de Triagem de Manchester como critério de prioridade.
+    \item Analisar o impacto da especialização dos médicos na gestão das filas.
+    \item Avaliar métricas de desempenho como tempo médio de espera, ocupação dos médicos e número de doentes atendidos.
+    \item Desenvolver uma interface gráfica interativa para visualização do sistema.
+\end{itemize}
+
+% ----------------------------
+% DESCRIÇÃO DO SISTEMA
+% ----------------------------
+\section{Descrição do Sistema Simulado}
+
+O sistema simulado representa uma clínica médica composta por diferentes especialidades: Medicina Geral, Pediatria e Ortopedia. Os doentes chegam ao sistema segundo uma distribuição probabilística e são encaminhados para a respetiva fila de acordo com a sua especialidade.
+
+Após a chegada, cada doente é classificado segundo o sistema de Triagem de Manchester, sendo atribuída uma pulseira de prioridade (Vermelha, Laranja, Amarela, Verde ou Azul). Os médicos atendem os doentes respeitando sempre a prioridade clínica dentro da sua especialidade.
+
+% ----------------------------
+% PARÂMETROS DA SIMULAÇÃO
+% ----------------------------
+\section{Parâmetros da Simulação}
+
+Os principais parâmetros configuráveis no sistema são:
+
+\begin{itemize}
+    \item Número de médicos disponíveis.
+    \item Taxa média de chegada de doentes.
+    \item Distribuição estatística das chegadas (Exponencial, Normal ou Uniforme).
+    \item Tempo médio de consulta.
+    \item Duração total da simulação.
+\end{itemize}
+
+Estes parâmetros podem ser alterados dinamicamente através da interface gráfica, permitindo testar diferentes cenários operacionais.
+
+% ----------------------------
+% IMPLEMENTAÇÃO
+% ----------------------------
+\section{Implementação}
+
+A simulação foi implementada em Python, utilizando uma abordagem orientada a eventos discretos. O estado do sistema é atualizado a cada unidade de tempo, sendo registadas métricas relevantes para posterior análise estatística.
+
+A interface gráfica foi desenvolvida com a biblioteca \textit{FreeSimpleGUI}, proporcionando uma visualização em tempo real das filas de espera, estado dos médicos e estatísticas globais da simulação.
+
+% ----------------------------
+% RESULTADOS
+% ----------------------------
+\section{Resultados}
+
+Nesta secção apresentam-se os principais resultados obtidos através da execução da simulação.
+
+\subsection{Evolução do Tamanho da Fila}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{fila.png}
+    \caption{Evolução do tamanho total da fila ao longo do tempo}
+\end{figure}
+
+A análise da evolução do tamanho da fila de espera ao longo do tempo permite compreender a dinâmica do sistema face à taxa de chegada de doentes e à capacidade de atendimento disponível. Observa-se que, em determinados períodos, a fila aumenta de forma significativa, refletindo momentos em que a chegada de novos doentes supera temporariamente a capacidade dos médicos.
+
+Este comportamento é esperado em sistemas reais de saúde e demonstra que o modelo consegue reproduzir situações de sobrecarga. Ao longo do tempo, verifica-se também a estabilização ou redução da fila, indicando que o sistema é capaz de recuperar quando os recursos disponíveis conseguem absorver a procura acumulada.
+
+\subsection{Ocupação dos Médicos}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{ocupacao.png}
+    \caption{Taxa de ocupação dos médicos}
+\end{figure}
+
+O gráfico da ocupação dos médicos ilustra a proporção de profissionais em atendimento ao longo da simulação. É possível observar períodos de elevada ocupação, próximos da capacidade máxima, alternados com momentos de menor carga de trabalho.
+
+Este resultado demonstra uma utilização eficiente dos recursos humanos, evitando tanto a ociosidade excessiva como a saturação constante. A variação ao longo do tempo está diretamente relacionada com o padrão de chegadas dos doentes e com a duração das consultas, refletindo um comportamento realista do funcionamento de uma clínica médica.
+
+\subsection{Distribuição por Pulseira de Triagem}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{hist_pulseiras.png}
+    \caption{Número de doentes atendidos por pulseira de Manchester}
+\end{figure}
+
+A distribuição dos doentes atendidos por pulseira de triagem permite avaliar o impacto da Triagem de Manchester na organização do atendimento. Observa-se que a maioria dos doentes pertence às categorias Amarela, Verde e Azul, o que está de acordo com a realidade clínica, onde situações menos urgentes são mais frequentes.
+
+Apesar da menor frequência de casos classificados como Vermelha e Laranja, estes representam situações de maior gravidade clínica, sendo corretamente identificados e integrados no sistema. Este resultado confirma a coerência da distribuição de prioridades implementada na simulação.
+
+\subsection{Tempo Médio de Espera por Pulseira}
+
+Para além do número de doentes atendidos por nível de prioridade, é fundamental analisar o tempo médio de espera associado a cada pulseira de triagem. Esta métrica permite avaliar se o sistema está a respeitar o princípio base da Triagem de Manchester: os doentes mais graves devem ser atendidos com maior rapidez.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{espera_pulseira.png}
+    \caption{Tempo médio de espera por pulseira de triagem}
+\end{figure}
+
+A análise do gráfico permite observar uma clara relação inversa entre a prioridade clínica e o tempo médio de espera. Doentes classificados com pulseira Vermelha e Laranja apresentam tempos de espera significativamente inferiores quando comparados com os doentes das categorias Verde e Azul. Este comportamento valida a correta implementação do sistema de prioridades e demonstra que a lógica de atendimento respeita critérios clínicos realistas.
+
+Adicionalmente, este resultado evidencia a importância da triagem em ambientes com recursos limitados, uma vez que permite otimizar o atendimento e reduzir riscos associados a atrasos em situações críticas.
+
+\subsection{Atendimentos por Especialidade}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{hist_especialidades.png}
+    \caption{Doentes atendidos por especialidade}
+\end{figure}
+
+O gráfico referente aos doentes atendidos por especialidade permite analisar a distribuição da carga de trabalho entre as diferentes áreas clínicas. Verifica-se que a especialidade Geral apresenta o maior número de atendimentos, refletindo o seu papel central numa clínica médica.
+
+As especialidades de Pediatria e Ortopedia apresentam valores inferiores, mas consistentes com a probabilidade de encaminhamento definida no modelo. Este resultado demonstra que o sistema consegue representar de forma equilibrada a diversidade de casos clínicos e a sua afetação às respetivas especialidades.
+
+\subsection{Tempo Médio de Espera por Especialidade}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{espera_especialidade.png}
+    \caption{Tempo médio de espera por especialidade}
+\end{figure}
+
+A análise do tempo médio de espera por especialidade permite identificar diferenças na eficiência do atendimento entre as várias áreas clínicas. Observam-se variações nos tempos médios, que podem ser explicadas pela disponibilidade de médicos, pelo número de doentes encaminhados e pela complexidade dos casos associados a cada especialidade.
+
+Este resultado evidencia a importância de uma correta alocação de recursos humanos por especialidade, uma vez que desequilíbrios podem conduzir a aumentos significativos no tempo de espera. A inclusão desta análise reforça a utilidade do modelo como ferramenta de apoio à tomada de decisão.
+
+
+% ----------------------------
+% DISCUSSÃO
+% ----------------------------
+\section{Discussão Crítica}
+
+A simulação desenvolvida permitiu analisar, de forma detalhada, o funcionamento de uma clínica médica sujeita a diferentes padrões de chegada de doentes, prioridades clínicas e limitações de recursos humanos. Os resultados obtidos demonstram que o modelo é capaz de reproduzir comportamentos realistas, tais como o crescimento temporário das filas, a variação da ocupação dos médicos e a influência direta da triagem no tempo de espera dos doentes.
+
+A análise dos gráficos evidenciou que o sistema de prioridades baseado na Triagem de Manchester desempenha um papel fundamental na organização do atendimento. Doentes com maior prioridade clínica apresentaram tempos de espera significativamente inferiores, validando a correta implementação da lógica de atendimento e demonstrando a sua importância em ambientes com elevada procura e recursos limitados.
+
+No entanto, a simulação também revelou limitações inerentes à distribuição de médicos por especialidade. Em determinados cenários, especialidades com menor número de profissionais apresentaram tempos médios de espera superiores, mesmo para doentes com prioridade intermédia. Este comportamento evidencia a necessidade de uma alocação equilibrada de recursos humanos e demonstra como pequenas variações na disponibilidade podem ter impacto significativo na eficiência do sistema.
+
+Outro aspeto relevante prende-se com a utilização de distribuições probabilísticas para modelar a chegada dos doentes e a duração das consultas. Embora estas abordagens permitam introduzir variabilidade e realismo, assumem simplificações que não capturam toda a complexidade de um ambiente clínico real, como interrupções inesperadas, urgências extremas ou variações sazonais da procura.
+
+Apesar destas limitações, o modelo constitui uma ferramenta valiosa para análise exploratória e apoio à tomada de decisão, permitindo testar diferentes configurações de parâmetros e avaliar o seu impacto no desempenho global da clínica. A simulação demonstra, assim, o potencial da modelação computacional como instrumento de apoio ao planeamento e gestão de sistemas de saúde.
+
+% ----------------------------
+% TRABALHO DE GRUPO
+% ----------------------------
+\section{Organização do Trabalho de Grupo}
+
+O trabalho foi desenvolvido por três elementos, com uma divisão equilibrada de tarefas:
+
+\begin{itemize}
+    \item Modelação do sistema e lógica da simulação.
+    \item Desenvolvimento da interface gráfica.
+    \item Análise de resultados e elaboração do relatório.
+\end{itemize}
+
+A colaboração entre os elementos foi essencial para a validação do modelo e melhoria contínua do sistema.
+
+% ----------------------------
+% CONCLUSÃO
+% ----------------------------
+\section{Conclusão}
+
+Neste trabalho foi desenvolvido um modelo de simulação discreta para o funcionamento de uma clínica médica, integrando conceitos de triagem clínica, gestão de filas, alocação de recursos e análise estatística de desempenho. A implementação permitiu simular a chegada de doentes segundo diferentes distribuições probabilísticas, o atendimento por médicos especializados e a priorização baseada na Triagem de Manchester.
+
+Os resultados obtidos evidenciam que o sistema responde de forma adequada às prioridades clínicas, garantindo tempos de espera reduzidos para doentes em situação mais grave. A análise dos gráficos confirmou a coerência do modelo, tanto na evolução das filas de espera como na ocupação dos médicos, refletindo comportamentos observados em contextos reais de prestação de cuidados de saúde.
+
+Adicionalmente, a inclusão de métricas como o tempo médio de espera por pulseira e por especialidade permitiu uma avaliação mais profunda do desempenho do sistema, destacando potenciais pontos de melhoria na distribuição de recursos. Estes resultados demonstram a importância da simulação como ferramenta de apoio à tomada de decisão, especialmente em cenários onde alterações reais seriam dispendiosas ou difíceis de implementar.
+
+Como trabalho futuro, seria interessante expandir o modelo para incluir fatores adicionais, tais como a distinção entre médicos sénior e júnior, a introdução de urgências extremas, variações temporais na taxa de chegada ou a simulação de múltiplos dias de funcionamento. Estas extensões permitiriam aumentar ainda mais o realismo do modelo e a sua aplicabilidade a contextos reais.
+
+Em suma, o trabalho desenvolvido cumpre os objetivos propostos, apresentando uma solução funcional, bem estruturada e capaz de analisar de forma crítica o funcionamento de um sistema clínico complexo, contribuindo para a compreensão dos desafios associados à gestão eficiente de serviços de saúde.
+
+\end{document}
